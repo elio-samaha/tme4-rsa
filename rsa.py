@@ -1,15 +1,38 @@
+def exp(a, n, p):
+    res = 1
+    N = n
+    A = a
+    while N>0:
+        if N%2 == 1: 
+            res =(res*A)%p
+        A = (A*A)%p 
+        N = N//2
+    return res
+
 def rsa_chiffrement (x,N,e):
-    return
+    return exp(x, e, N)
 
 def rsa_dechiffrement (y,p,q,d):
-    return
+    return exp(y,d,p*q)
+
+def bezout(a, b):
+    u0,v0, u1,v1, r0,r1 = 1,0,0,1, a, b
+    while r1 != 0:
+        qi = r0 // r1
+        u0,u1 = u1, u0 - qi*u1
+        v0,v1 = v1, v0 - qi*v1
+        r0, r1 = r1, r0 - qi*r1
+    return r0, u0, v0
 
 # Retourne s tel que s % n1 == a1 et s % n2 == a2
 def crt2 (a1,a2,n1,n2):
-    return
+    _, u,v = bezout(n1,n2)
+    return (a2*n1*u + a1*n2*v)%(n1*n2) , 1
 
 def rsa_dechiffrement_crt (y,p,q,up,uq,dp,dq,N):
-    return
+    xp = exp(y,dp,p)
+    xq = exp(y,dq,q)
+    return (xp*up + xq*uq) %N
 
 #### Wiener
 def cfrac(a,b):
