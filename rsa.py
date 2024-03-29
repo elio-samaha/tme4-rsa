@@ -42,7 +42,6 @@ def cfrac(a,b):
         a,b = b , a%b
     return li
 
-"""
 def reduite(L):
     k = [L[0] , L[0]*L[1] + 1]
     d = [1 , L[1]]
@@ -50,35 +49,15 @@ def reduite(L):
         k.append(k[i] * L[i+1] + k[i-1])
         d.append(d[i] * L[i+1] + d[i-1])
     return (k,d)
-"""
-
-def reduite(L):
-    k = [L[0] , L[0]*L[1] + 1]
-    d = [1 , L[1]]
-    for i in range(1 , len(L)): 
-        k.append(k[i] * L[i] + k[i-1])
-        d.append(d[i] * L[i] + d[i-1])
-    return (k,d)
 
 def Wiener(m,c,N,e):
     L = cfrac(e,N)
     (k,d) = reduite(L)
-    for i in range(len(k)):
+    for i in range(len(d)):
         x = pow(c , d[i] , int(N))
         if x == m:
             return d[i]
     return -1
-
-"""
-def Wiener(m,c,N,e):
-    L = cfrac(e,N)
-    (k,d) = reduite(L)
-    for i in range(len(k)):
-        x = pow(c , k[i] , int(N))
-        if x == m:
-            return d[i]
-    return -1
-"""
 
 ### Generation de premiers
 import random
