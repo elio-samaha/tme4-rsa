@@ -36,13 +36,28 @@ def rsa_dechiffrement_crt (y,p,q,up,uq,dp,dq,N):
 
 #### Wiener
 def cfrac(a,b):
-    return
+    li = []
+    while b != 0:
+        li.append(a//b)
+        a,b = b , a%b
+    return li
 
 def reduite(L):
-    return
+    k = [L[0] , L[0]*L[1] + 1]
+    d = [1 , L[1]]
+    for i in range(1 , len(L) - 1): 
+        k.append(k[i] * L[i+1] + k[i-1])
+        d.append(d[i] * L[i+1] + d[i-1])
+    return (k,d)
 
 def Wiener(m,c,N,e):
-    return
+    L = cfrac(e,N)
+    (k,d) = reduite(L)
+    for i in range(len(k)):
+        x = pow(c , k[i] , int(N))
+        if x == m:
+            return d[i]
+    return -1
 
 
 ### Generation de premiers
