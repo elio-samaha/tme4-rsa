@@ -55,7 +55,7 @@ def reduite(L):
 def reduite(L):
     k = [L[0] , L[0]*L[1] + 1]
     d = [1 , L[1]]
-    for i in range(1 , len(L) - 1): 
+    for i in range(1 , len(L)): 
         k.append(k[i] * L[i] + k[i-1])
         d.append(d[i] * L[i] + d[i-1])
     return (k,d)
